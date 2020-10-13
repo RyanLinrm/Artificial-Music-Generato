@@ -10,6 +10,7 @@ import MagentaCom from './mm.js';
 import Generator from './generator';
 import MidiKeyboard from './piano';
 import WebPiano from './pianowhre';
+import RNN from './components/MusicRNN';
 
 class App extends React.Component {
   
@@ -24,6 +25,8 @@ class App extends React.Component {
         <br/>
         {/*<MidiKeyboard />*/}
         <WebPiano />
+        <br/>
+        <RNN />
       </div>
     );
 
