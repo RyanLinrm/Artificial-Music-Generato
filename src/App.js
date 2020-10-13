@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
+import ReactDOM from 'react-dom';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './App.css';
+import YouTube from 'react-youtube';
+import Cookies from 'js-cookie';
+import QRCode from 'qrcode.react'
+import * as mm from "@magenta/music";
+import MagentaCom from './mm.js';
+import Generator from './generator';
+import MidiKeyboard from './piano';
+import WebPiano from './pianowhre';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  
+  render(){
+
+    return (
+      <div className="App">
+        <h4 className="text-center">Piano Roll:</h4>
+        <MagentaCom />
+        <br/>
+        <Generator />
+        <br/>
+        {/*<MidiKeyboard />*/}
+        <WebPiano />
+      </div>
+    );
+
+}
 }
 
 export default App;

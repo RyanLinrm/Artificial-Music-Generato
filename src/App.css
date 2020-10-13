@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: palegoldenrod;
 }
 
 .App-logo {
@@ -19,4 +20,50 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.songblock {
+  border: 2px solid Violet;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.title span {
+  font-size: 25px;
+}
+
+.votebtn {
+  font-size: small;
+  margin-bottom: 3px;
+}
+
+@media screen and (max-width: 600px) {
+  .songblock {
+      margin-bottom: 10px;
+  }
+  
+  .title {
+      font-size: 15px;
+  }
+
+  .title span {
+      font-size: 20px;
+  }
+
+  .votebtn {
+      font-size: 10px;
+  }
+}
+
+#rcorners2 {
+  border-radius: 25px;
+  border: 0.5px solid #73AD21;
+}
+
+#rcorners3 {
+  border-radius: 25px;
+  border: 0.5px solid #73AD21;
 }
