@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
+import '../App.css';
 import * as mm from "@magenta/music";
 
 class MagentaCom extends React.Component{
@@ -253,7 +253,7 @@ class MagentaCom extends React.Component{
     render(){
 
         return(
-            <div>
+            <div className='text-center'>
                 <div>
                     <canvas ref={this.canvasRef} />
                 </div>

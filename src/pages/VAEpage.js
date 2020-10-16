@@ -8,6 +8,7 @@ export default class VAEpage extends Component {
                 <h1 className='text-center'>Generate a Random Trio Artificially</h1>
                 <br/><br/>
                 <MusicVAE />
+
             </div>
         )
     }
