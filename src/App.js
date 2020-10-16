@@ -2,6 +2,7 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import Homepage from "./pages/homepage"
 import VAEpage from './pages/VAEpage'
+import RNNpage from './pages/RNNpage'
 
 
 class App extends React.Component {
@@ -11,6 +12,7 @@ class App extends React.Component {
         <div>
           <Switch>
             <Route path="/gentrio" component={VAEpage} />
+            <Route path="/genmelody" component={RNNpage} />
             <Route path="/">
               <Homepage />
             </Route>

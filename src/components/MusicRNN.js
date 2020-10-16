@@ -1,5 +1,6 @@
 import React from 'react';
 import * as mm from "@magenta/music";
+import WebPiano from '../components/RecordingPiano'
 
 class RNN extends React.Component {
     constructor(props){
@@ -62,8 +63,12 @@ class RNN extends React.Component {
     render(){
         return(
             <div>
-                <div>
+                <div className='text-center'>
                     <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
+                </div>
+                <br/><br/><br/>
+                <div className='text-center'>
+                    <WebPiano />
                 </div>
             </div>
         )

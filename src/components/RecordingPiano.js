@@ -104,7 +104,7 @@ class WebPiano extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="h3">react-piano recording + playback demo</h1>
+        <h1 className="h3">Piano Keyboard + playback</h1>
         <div className="mt-5">
           <SoundfontProvider
             instrumentName="acoustic_grand_piano"
