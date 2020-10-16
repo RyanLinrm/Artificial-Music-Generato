@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
+import '../App.css';
 import * as mm from "@magenta/music";
 
-class Generator extends React.Component {
+class MusicVAE extends React.Component {
     constructor(props){
         super()
 
@@ -63,7 +63,7 @@ class Generator extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="text-center">
                 <div>
                     <canvas ref={this.canvasRef2} />
                 </div>
@@ -83,4 +83,4 @@ class Generator extends React.Component {
     }
 }
 
-export default Generator;
+export default MusicVAE;
