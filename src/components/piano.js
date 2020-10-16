@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
 import 'react-piano/dist/styles.css';
-import DimensionsProvider from './DimensionsProvider';
-import SoundfontProvider from './SoundfontProvider';
+import DimensionsProvider from '../DimensionsProvider';
+import SoundfontProvider from '../SoundfontProvider';
 
 export default function MidiKeyboard(props) {
     const firstNote = MidiNumbers.fromNote('c3');

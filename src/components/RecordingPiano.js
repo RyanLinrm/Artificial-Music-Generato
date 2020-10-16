@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
 import 'react-piano/dist/styles.css';
 
-import DimensionsProvider from './DimensionsProvider';
-import SoundfontProvider from './SoundfontProvider';
+import DimensionsProvider from '../DimensionsProvider';
+import SoundfontProvider from '../SoundfontProvider';
 import PianoWithRecording from './PianoWithRecording';
 
 // webkitAudioContext fallback needed to support Safari

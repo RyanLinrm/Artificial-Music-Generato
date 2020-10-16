@@ -6,10 +6,10 @@ import YouTube from 'react-youtube';
 import Cookies from 'js-cookie';
 import QRCode from 'qrcode.react'
 import * as mm from "@magenta/music";
-import MagentaCom from './mm.js';
-import Generator from './generator';
-import MidiKeyboard from './piano';
-import WebPiano from './pianowhre';
+import MagentaCom from './components/mm.js';
+import Generator from './components/generator';
+import MidiKeyboard from './components/piano';
+import WebPiano from './components/RecordingPiano';
 import RNN from './components/MusicRNN';
 
 class App extends React.Component {
