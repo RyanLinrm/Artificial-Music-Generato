@@ -11,7 +11,7 @@ class MusicVAE extends React.Component {
         this.canvasRef2 = React.createRef();
 
         const model = new mm.MusicVAE(
-            'https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/trio_4bar');
+            'https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/trio_4bar_lokl_small_q1');
         const player = new mm.Player();
 
         this.state = {
@@ -59,7 +59,7 @@ class MusicVAE extends React.Component {
         this.state.player.stop();
     }
 
-    show = () => {
+    downloadMidi = () => {
         console.log(this.state.trio)
         
         const midi = mm.sequenceProtoToMidi(this.state.trio);
@@ -109,7 +109,7 @@ class MusicVAE extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-info" onClick={()=>this.show()}>save midi</button>
+                    <button className="btn btn-outline-info" onClick={()=>this.downloadMidi()}>save midi</button>
                 </div>
             </div>
         )

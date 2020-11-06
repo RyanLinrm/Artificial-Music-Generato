@@ -1,6 +1,7 @@
 import React from 'react';
 import * as mm from "@magenta/music";
 import WebPiano from '../components/RecordingPiano'
+import Slider from 'react-input-slider';
 
 class RNN extends React.Component {
     constructor(props){
@@ -10,7 +11,8 @@ class RNN extends React.Component {
 
         this.state = {
             trio: null,
-            player: null
+            player: null,
+            x: 0.5
         }
 
         this.TWINKLE_TWINKLE = {
@@ -38,7 +40,7 @@ class RNN extends React.Component {
     componentDidMount = () => {
         
         this.music_rnn = new mm.MusicRNN(
-            'https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn')
+            'https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/melody_rnn')
         
         this.music_rnn.initialize()
     }
@@ -51,12 +53,12 @@ class RNN extends React.Component {
     }
 
     quantize = () => {
-        const qns = mm.sequences.quantizeNoteSequence(this.TWINKLE_TWINKLE, 4)
-        let rnnSteps = 40
-        let rnnTemp = 1
+        const seque = mm.sequences.quantizeNoteSequence(this.TWINKLE_TWINKLE, 4)
+        let rnnSteps = 80
+        let rnnTemp = this.state.x
 
         this.music_rnn
-        .continueSequence(qns, rnnSteps, rnnTemp)
+        .continueSequence(seque, rnnSteps, rnnTemp)
         .then((sample) => this.player.start(sample));
     } 
 
@@ -64,7 +66,20 @@ class RNN extends React.Component {
         return(
             <div>
                 <div className='text-center'>
+                <br/>
+                <div>
+                    <div>{'Temperature: ' + this.state.x}</div>
+                    <Slider
+                        axis="x"
+                        xstep={0.1}
+                        xmin={0.1}
+                        xmax={1}
+                        x={this.state.x}
+                        onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
+                    />
+                </div>
                     <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
+                    <button className="btn btn-outline-danger" onClick={()=>this.play()}>Stop</button>
                 </div>
                 <br/><br/><br/>
                 <div className='text-center'>
