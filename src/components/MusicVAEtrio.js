@@ -61,6 +61,24 @@ class MusicVAE extends React.Component {
 
     show = () => {
         console.log(this.state.trio)
+        
+        const midi = mm.sequenceProtoToMidi(this.state.trio);
+        const file = new Blob([midi], {type: 'audio/midi'});
+    
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
+        } else { // Others
+            const a = document.createElement('a');
+            const url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = 'midi.mid';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+            }, 0); 
+        }
     }
 
     render(){
@@ -84,13 +102,15 @@ class MusicVAE extends React.Component {
                 <div>
                     <button className="btn btn-outline-info" onClick={()=>this.generate()}>Generate</button>
                 </div>
+                <br/>
                 <div>
                     <button className="btn btn-outline-primary" onClick={()=>this.start()}>play</button>
                     <button className="btn btn-outline-danger" onClick={()=>this.end()}>stop</button>
                 </div>
-                {/*<div>
-                    <button className="btn btn-outline-info" onClick={()=>this.show()}>midi</button>
-                </div>*/}
+                <br/>
+                <div>
+                    <button className="btn btn-outline-info" onClick={()=>this.show()}>save midi</button>
+                </div>
             </div>
         )
     }
