@@ -104,7 +104,7 @@ class WebPiano extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="h3">Piano Keyboard + playback</h1>
+        <h1 className="h3">Piano Keyboard Recording</h1>
         <div className="mt-5">
           <SoundfontProvider
             instrumentName="acoustic_grand_piano"
@@ -125,8 +125,8 @@ class WebPiano extends React.Component {
           />
         </div>
         <div className="mt-5">
-          <button onClick={this.onClickPlay}>Play</button>
-          <button onClick={this.onClickStop}>Stop</button>
+          {/*<button onClick={this.onClickPlay}>Play</button>
+          <button onClick={this.onClickStop}>Stop</button>*/}
           <button onClick={this.onClickClear}>Clear</button>
         </div>
         <div className="mt-5">
