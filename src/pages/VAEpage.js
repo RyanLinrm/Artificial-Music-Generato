@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MusicVAE from '../components/MusicVAE'
+import MusicVAE from '../components/MusicVAEtrio'
 
 export default class VAEpage extends Component {
     render() {
