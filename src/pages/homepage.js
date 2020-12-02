@@ -15,6 +15,10 @@ export class Homepage extends Component {
     }
 
     redirect3 = () => {
+        this.props.history.push(`/genwithchords`)
+    }
+
+    redirect4 = () => {
         this.props.history.push(`/tools`);
     }
     
@@ -28,11 +32,11 @@ export class Homepage extends Component {
                 <div className='text-center'>
                     <button className='btn btn-primary' onClick={this.redirect1}>Generate Trio</button>
                     <br/><br/>
-                    <button className='btn btn-success' onClick={this.redirect2}>Generate Melody</button>
+                    <button className='btn btn-success' onClick={this.redirect3}>Generate Melody by Chords</button>
                     <br/><br/>
-                    <button className='btn btn-danger'>Continues a Melody</button>
+                    <button className='btn btn-danger' onClick={this.redirect2}>Continues a Melody</button>
                     <br/><br/>
-                    <button className='btn btn-secondary' onClick={this.redirect3}>Tools</button>
+                    <button className='btn btn-secondary' onClick={this.redirect4}>Tools</button>
                     <br/><br/>
                     <button className='btn btn-info'>About</button>
                     <br/><br/>

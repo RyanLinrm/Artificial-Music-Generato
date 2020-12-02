@@ -68,7 +68,7 @@ class RNN extends React.Component {
                 <div className='text-center'>
                 <br/>
                 <div>
-                    <div>{'Temperature: ' + this.state.x}</div>
+                    <div>{'Randomness: '}</div>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -78,6 +78,7 @@ class RNN extends React.Component {
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
                 </div>
+                <br/>
                     <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
                     <button className="btn btn-outline-danger" onClick={()=>this.play()}>Stop</button>
                 </div>

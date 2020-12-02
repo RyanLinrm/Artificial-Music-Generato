@@ -8,10 +8,9 @@ class MusicVAE extends React.Component {
     constructor(props){
         super()
 
-        this.canvasRef2 = React.createRef();
-
         const model = new mm.MusicVAE(
-            'https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/trio_4bar_lokl_small_q1');
+            'https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/trio_4bar');
+        model.initialize();
         const player = new mm.Player();
 
         this.state = {
@@ -19,18 +18,10 @@ class MusicVAE extends React.Component {
             player: player,
             model: model,
             canvasrf: null,
-            x: 0.5
+            x: 0.5,
+            tempo: 80
         }
 
-    }
-
-    componentDidMount = () => {
-        
-        let canvasrf = this.canvasRef2.current;
-
-        this.setState({
-           canvasrf: canvasrf
-        })
     }
 
 
@@ -52,7 +43,7 @@ class MusicVAE extends React.Component {
 
         if(trio){
 
-            this.state.player.start(trio);
+            this.state.player.start(trio, this.state.tempo);
         }
     }
     end = () => {
@@ -85,11 +76,7 @@ class MusicVAE extends React.Component {
         return(
             <div className="text-center">
                 <div>
-                    <canvas ref={this.canvasRef2} />
-                </div>
-                <br/>
-                <div>
-                    <div>{'Temperature: ' + this.state.x}</div>
+                    <div>{'Randomness: '}</div>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -98,7 +85,18 @@ class MusicVAE extends React.Component {
                         x={this.state.x}
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
+                    <br/>
+                    <div>{'Tempo: '}</div>
+                    <Slider
+                        axis="x"
+                        xstep={1}
+                        xmin={60}
+                        xmax={120}
+                        x={this.state.tempo}
+                        onChange={({ x }) => this.setState({ tempo: parseInt(x) })}
+                    />
                 </div>
+                <br/>
                 <div>
                     <button className="btn btn-outline-info" onClick={()=>this.generate()}>Generate</button>
                 </div>
