@@ -11,10 +11,14 @@ class MusicVAE extends React.Component {
         const model = new mm.MusicVAE(
             'https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/trio_4bar');
         model.initialize();
-        const player = new mm.Player();
+
+        const player = new mm.SoundFontPlayer(
+            'https://storage.googleapis.com/download.magenta.tensorflow.org/soundfonts_js/sgm_plus'
+        );
 
         this.state = {
-            trio: null,
+            trios: null,
+            trioNum : 1,
             player: player,
             model: model,
             canvasrf: null,
@@ -30,30 +34,37 @@ class MusicVAE extends React.Component {
             this.state.player.resumeContext(); // enable audio
             this.state.model.sample(1, this.state.x)
             .then((samples) => {
-                let trio = samples[0];
                 this.setState({
-                    trio: trio
+                    trios: samples
+                    //trioNum: samples.length
                 })
-                });
+            });
+        
     }
 
-    start = () => {
+    start = (index) => {
 
-        let trio = this.state.trio;
+        let trios = this.state.trios
+        //let trioNum = this.state.trioNum
+        let tempo = this.state.tempo
 
-        if(trio){
+        if(trios){
 
-            this.state.player.start(trio, this.state.tempo);
+            this.state.player.start(trios[index], tempo)
+                .then( ()=> {
+                    //let nexti = (index + 1) % trioNum
+                    this.start(index)
+                });
         }
     }
+
     end = () => {
         this.state.player.stop();
     }
 
     downloadMidi = () => {
-        console.log(this.state.trio)
         
-        const midi = mm.sequenceProtoToMidi(this.state.trio);
+        const midi = mm.sequenceProtoToMidi(this.state.trios[0]);
         const file = new Blob([midi], {type: 'audio/midi'});
     
         if (window.navigator.msSaveOrOpenBlob) {
@@ -102,7 +113,7 @@ class MusicVAE extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-primary" onClick={()=>this.start()}>play</button>
+                    <button className="btn btn-outline-primary" onClick={()=>this.start(0)}>play</button>
                     <button className="btn btn-outline-danger" onClick={()=>this.end()}>stop</button>
                 </div>
                 <br/>
