@@ -305,10 +305,26 @@ export default class Chords extends Component {
         })
     }
 
+    sequenceAdjustment = (seq) =>{
+        let sq = new mm.sequences.clone(seq)
+        sq.notes.forEach( (note) => {
+            let offset = 0.01 * (Math.random() - 0.5)
+            if( sq.notes.startTime + offset < 0 ){
+                offset = -seq.notes.startTime
+            }
+            if( sq.notes.endTime > sq.totalTime ){
+                offset = sq.totalTime - sq.notes.endTime
+            }
+            sq.notes.startTime += offset
+            sq.notes.endTime += offset
+        })
+        return sq
+    }
+
     play = (chordi) => {
         let index = this.state.x
-        let unquantizedSeq = new mm.sequences.unquantizeSequence(this.state.chordseqs[index][chordi])
-        this.player.start(unquantizedSeq).then( ()=> {
+        let playingSeq = new mm.sequences.unquantizeSequence(this.state.chordseqs[index][chordi])
+        this.player.start(this.sequenceAdjustment(playingSeq)).then( ()=> {
             let nexti = (chordi + 1 )% this.state.chordProg.length
             this.play(nexti)
         })
