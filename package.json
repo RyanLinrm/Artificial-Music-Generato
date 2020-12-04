@@ -17,11 +17,14 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.2.0",
     "react-youtube": "^7.9.0",
+    "serve": "^11.3.2",
     "soundfont-player": "latest"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
+    "heroku-postbuild": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
