@@ -2,9 +2,6 @@
   "name": "sandbox",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "12.x"
-  },
   "dependencies": {
     "@magenta/music": "^1.12.1",
     "js-cookie": "^2.2.1",
