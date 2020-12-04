@@ -12,7 +12,9 @@ class RNN extends React.Component {
         this.state = {
             trio: null,
             player: null,
-            x: 0.5
+            x: 0.5,
+            tempo : 80,
+            mididata: null
         }
 
         this.TWINKLE_TWINKLE = {
@@ -52,9 +54,44 @@ class RNN extends React.Component {
         }
     }
 
+    mididata = (e) => {
+        let mididata = e
+        let l = mididata.length
+
+        for( let i = 0; i < l; i++ ){
+
+            for( let j = 0; j < 3; j++ ){
+                if(j === 0){
+                    Object.defineProperty(mididata[i], 'pitch',
+                        Object.getOwnPropertyDescriptor(mididata[i], "midiNumber"));
+                    delete mididata[i]['midiNumber'];
+                }
+                if(j === 1){
+                    mididata[i].startTime = parseFloat(mididata[i]['time'].toFixed(1))
+                    delete mididata[i]['time'];
+                }
+                if(j === 2){
+                    mididata[i].endTime = parseFloat( (mididata[i]['duration'] + mididata[i]['startTime']).toFixed(1) )
+                    delete mididata[i]['duration'];
+                }
+            }
+        }
+
+        let totaltime = mididata[l-1].endTime
+
+        let midiobj = {
+            notes: mididata,
+            totalTime: totaltime
+        }
+
+        this.setState({
+            mididata: midiobj
+        })
+    }
+
     quantize = () => {
-        const seque = mm.sequences.quantizeNoteSequence(this.TWINKLE_TWINKLE, 4)
-        let rnnSteps = 80
+        const seque = mm.sequences.quantizeNoteSequence(this.state.mididata, 4)
+        let rnnSteps = this.state.tempo
         let rnnTemp = this.state.x
 
         this.music_rnn
@@ -77,6 +114,16 @@ class RNN extends React.Component {
                         x={this.state.x}
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
+                    <br/>
+                    <div>{'Tempo: '}</div>
+                    <Slider
+                        axis="x"
+                        xstep={1}
+                        xmin={60}
+                        xmax={120}
+                        x={this.state.tempo}
+                        onChange={({ x }) => this.setState({ tempo: parseInt(x) })}
+                    />
                 </div>
                 <br/>
                     <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
@@ -84,7 +131,7 @@ class RNN extends React.Component {
                 </div>
                 <br/><br/><br/>
                 <div className='text-center'>
-                    <WebPiano />
+                    <WebPiano passMidiData={this.mididata}/>
                 </div>
             </div>
         )

@@ -101,6 +101,11 @@ class WebPiano extends React.Component {
     });
   };
 
+  onClickSave = () => {
+    this.props.passMidiData(this.state.recording.events)
+    console.log('gotem')
+  }
+
   render() {
     return (
       <div>
@@ -128,11 +133,12 @@ class WebPiano extends React.Component {
           {/*<button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>*/}
           <button onClick={this.onClickClear}>Clear</button>
+          <button onClick={this.onClickSave}>Done</button>
         </div>
-        <div className="mt-5">
+        {/*<div className="mt-5">
           <strong>Recorded notes</strong>
           <div>{JSON.stringify(this.state.recording.events)}</div>
-        </div>
+        </div>*/}
       </div>
     );
   }
