@@ -1,6 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import Homepage from "./pages/Homepage"
+import Homepage from "./pages/homepage"
 import VAEpage from './pages/VAEpage'
 import RNNpage from './pages/RNNpage'
 import ChordPage from './pages/ChordPage'
