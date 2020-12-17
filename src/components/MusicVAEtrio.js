@@ -87,7 +87,7 @@ class MusicVAE extends React.Component {
         return(
             <div className="text-center">
                 <div>
-                    <div>{'Randomness: '}</div>
+                    <p className="labeltext2">Temperature: </p>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -97,7 +97,7 @@ class MusicVAE extends React.Component {
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
                     <br/><br/>
-                    <div>{'Tempo: '}</div>
+                    <p className="labeltext2">Tempo: </p>
                     <Slider
                         axis="x"
                         xstep={1}

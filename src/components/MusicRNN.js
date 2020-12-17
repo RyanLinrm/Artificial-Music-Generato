@@ -104,9 +104,9 @@ class RNN extends React.Component {
         return(
             <div>
                 <div className='text-center'>
-                <br/><br/>
+                <br/>
                 <div>
-                    <p className="labeltext">Randomness: </p>
+                    <p className="labeltext">Temperature: </p>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -121,7 +121,7 @@ class RNN extends React.Component {
                     <button className="btn btn-info" onClick={()=>this.quantize()}>Generate</button>
                     <button className="btn btn-danger" onClick={()=>this.play()}>Stop</button>
                 </div>
-                <br/><br/><br/>
+                <br/><br/>
                 <div className='text-center'>
                     <WebPiano passMidiData={this.mididata}/>
                 </div>

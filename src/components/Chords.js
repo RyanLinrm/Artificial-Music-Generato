@@ -263,9 +263,8 @@ export default class Chords extends Component {
     render() {
         return (
             <div className='text-center'>
-                <div>
-                    <canvas ref={this.canvasRef} />
-                </div>
+                <br/>
+                <br/>
                 <br/>
                 <div>
                 <div>{'Randomness: '}</div>
@@ -293,10 +292,11 @@ export default class Chords extends Component {
                 <br/>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
-                    <button className="btn btn-outline-primary" onClick={()=>this.play(0)}>Play</button>
-                    <button className="btn btn-outline-danger" onClick={()=>this.stop()}>Stop</button>
+                    <button className="btn btn-info" onClick={()=>this.quantize()}>Generate</button>
+                    <button className="btn btn-primary" onClick={()=>this.play(0)}>Play</button>
+                    <button className="btn btn-danger" onClick={()=>this.stop()}>Stop</button>
                 </div>
+                <br/><br/>
             </div>
         )
     }
