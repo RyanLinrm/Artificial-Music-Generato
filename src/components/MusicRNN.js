@@ -2,6 +2,7 @@ import React from 'react';
 import * as mm from "@magenta/music";
 import WebPiano from '../components/RecordingPiano'
 import Slider from 'react-input-slider';
+import '../img/page.css'
 
 class RNN extends React.Component {
     constructor(props){
@@ -95,7 +96,7 @@ class RNN extends React.Component {
         let rnnTemp = this.state.x
 
         this.music_rnn
-        .continueSequence(seque, rnnSteps, rnnTemp)
+        .continueSequence(seque, rnnSteps)
         .then((sample) => this.player.start(sample));
     } 
 
@@ -103,9 +104,9 @@ class RNN extends React.Component {
         return(
             <div>
                 <div className='text-center'>
-                <br/>
+                <br/><br/>
                 <div>
-                    <div>{'Randomness: '}</div>
+                    <p className="labeltext">Randomness: </p>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -115,19 +116,10 @@ class RNN extends React.Component {
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
                     <br/>
-                    <div>{'Tempo: '}</div>
-                    <Slider
-                        axis="x"
-                        xstep={1}
-                        xmin={60}
-                        xmax={120}
-                        x={this.state.tempo}
-                        onChange={({ x }) => this.setState({ tempo: parseInt(x) })}
-                    />
                 </div>
                 <br/>
-                    <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
-                    <button className="btn btn-outline-danger" onClick={()=>this.play()}>Stop</button>
+                    <button className="btn btn-info" onClick={()=>this.quantize()}>Generate</button>
+                    <button className="btn btn-danger" onClick={()=>this.play()}>Stop</button>
                 </div>
                 <br/><br/><br/>
                 <div className='text-center'>
