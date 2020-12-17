@@ -28,6 +28,7 @@ export class Homepage extends Component {
             <div id='homepage'>
                 <br/>
                 <h1 className="text-center hometext">Home Page</h1>
+                <br/>
                 <h2 className='text-center hometext'>Artificial Music Generator</h2>
                 <br/><br/><br/>
                 <br/><br/>
@@ -42,7 +43,7 @@ export class Homepage extends Component {
                     <br/><br/>
                     <br/><br/>
                     <br/><br/>
-                    <br/><br/><br/><br/><br/><br/>
+                    <br/><br/><br/><br/>
                 </div>
             </div>
         )

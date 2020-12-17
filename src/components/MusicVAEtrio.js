@@ -64,22 +64,24 @@ class MusicVAE extends React.Component {
 
     downloadMidi = () => {
         
-        const midi = mm.sequenceProtoToMidi(this.state.trios[0]);
-        const file = new Blob([midi], {type: 'audio/midi'});
-    
-        if (window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
-        } else { // Others
-            const a = document.createElement('a');
-            const url = URL.createObjectURL(file);
-            a.href = url;
-            a.download = 'midi.mid';
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);  
-            }, 0); 
+        if( this.state.trios != null){
+            const midi = mm.sequenceProtoToMidi(this.state.trios[0]);
+            const file = new Blob([midi], {type: 'audio/midi'});
+        
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
+            } else { // Others
+                const a = document.createElement('a');
+                const url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = 'midi.mid';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+                }, 0); 
+            }
         }
     }
 

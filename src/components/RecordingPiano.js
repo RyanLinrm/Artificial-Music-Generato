@@ -133,7 +133,7 @@ class WebPiano extends React.Component {
         <div className="mt-5">
           {/*<button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>*/}
-          <button onClick={this.onClickClear}>Record</button>
+          <button>Record</button>
           <button onClick={this.onClickClear}>Clear</button>
           <button onClick={this.onClickSave}>Done</button>
         </div>

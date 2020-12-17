@@ -15,7 +15,7 @@ export default class ChordPage extends Component {
                         <button className="btn btn-info">Back</button>
                     </Link>
                 </div>
-                <br/><br/><br/>
+                <br/><br/>
             </div>
         )
     }

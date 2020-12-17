@@ -260,10 +260,32 @@ export default class Chords extends Component {
         //console.log(this.state.seq2)
     }
 
+    downloadMidi = () => {
+
+        if( this.state.chordseqs != null){
+            const midi = mm.sequenceProtoToMidi(this.state.chordseqs[0][0]);
+            const file = new Blob([midi], {type: 'audio/midi'});
+        
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
+            } else { // Others
+                const a = document.createElement('a');
+                const url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = 'midi.mid';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+                }, 0); 
+            }
+        }
+    }
+
     render() {
         return (
             <div className='text-center'>
-                <br/>
                 <br/>
                 <br/>
                 <div>
@@ -296,7 +318,11 @@ export default class Chords extends Component {
                     <button className="btn btn-primary" onClick={()=>this.play(0)}>Play</button>
                     <button className="btn btn-danger" onClick={()=>this.stop()}>Stop</button>
                 </div>
-                <br/><br/>
+                <br/>
+                <div>
+                    <button className="btn btn-info" onClick={()=>this.downloadMidi()}>save midi</button>
+                </div>
+                <br/>
             </div>
         )
     }

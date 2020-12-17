@@ -15,7 +15,8 @@ class RNN extends React.Component {
             player: null,
             x: 0.5,
             tempo : 80,
-            mididata: null
+            mididata: null,
+            sample: null
         }
 
         this.TWINKLE_TWINKLE = {
@@ -97,8 +98,37 @@ class RNN extends React.Component {
 
         this.music_rnn
         .continueSequence(seque, rnnSteps)
-        .then((sample) => this.player.start(sample));
+        .then((sample) => {
+            this.setState({
+                sample: sample
+            })
+            this.player.start(sample)
+        });
     } 
+
+
+    downloadMidi = () => {
+        
+        if(this.state.sample != null){
+            const midi = mm.sequenceProtoToMidi(this.state.sample);
+            const file = new Blob([midi], {type: 'audio/midi'});
+        
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
+            } else { // Others
+                const a = document.createElement('a');
+                const url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = 'midi.mid';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+                }, 0); 
+            }
+        }
+    }
 
     render(){
         return(
@@ -120,6 +150,7 @@ class RNN extends React.Component {
                 <br/>
                     <button className="btn btn-info" onClick={()=>this.quantize()}>Generate</button>
                     <button className="btn btn-danger" onClick={()=>this.play()}>Stop</button>
+                    <button className="btn btn-info" onClick={()=>this.downloadMidi()}>save midi</button>
                 </div>
                 <br/><br/>
                 <div className='text-center'>
