@@ -64,22 +64,24 @@ class MusicVAE extends React.Component {
 
     downloadMidi = () => {
         
-        const midi = mm.sequenceProtoToMidi(this.state.trios[0]);
-        const file = new Blob([midi], {type: 'audio/midi'});
-    
-        if (window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
-        } else { // Others
-            const a = document.createElement('a');
-            const url = URL.createObjectURL(file);
-            a.href = url;
-            a.download = 'midi.mid';
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);  
-            }, 0); 
+        if( this.state.trios != null){
+            const midi = mm.sequenceProtoToMidi(this.state.trios[0]);
+            const file = new Blob([midi], {type: 'audio/midi'});
+        
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
+            } else { // Others
+                const a = document.createElement('a');
+                const url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = 'midi.mid';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+                }, 0); 
+            }
         }
     }
 
@@ -87,7 +89,7 @@ class MusicVAE extends React.Component {
         return(
             <div className="text-center">
                 <div>
-                    <div>{'Randomness: '}</div>
+                    <p className="labeltext2">Temperature: </p>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -96,8 +98,8 @@ class MusicVAE extends React.Component {
                         x={this.state.x}
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
-                    <br/>
-                    <div>{'Tempo: '}</div>
+                    <br/><br/>
+                    <p className="labeltext2">Tempo: </p>
                     <Slider
                         axis="x"
                         xstep={1}
@@ -107,18 +109,18 @@ class MusicVAE extends React.Component {
                         onChange={({ x }) => this.setState({ tempo: parseInt(x) })}
                     />
                 </div>
-                <br/>
+                <br/><br/>
                 <div>
-                    <button className="btn btn-outline-info" onClick={()=>this.generate()}>Generate</button>
+                    <button className="btn btn-info" onClick={()=>this.generate()}>Generate</button>
                 </div>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-primary" onClick={()=>this.start(0)}>play</button>
-                    <button className="btn btn-outline-danger" onClick={()=>this.end()}>stop</button>
+                    <button className="btn btn-primary" onClick={()=>this.start(0)}>play</button>
+                    <button className="btn btn-danger" onClick={()=>this.end()}>stop</button>
                 </div>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-info" onClick={()=>this.downloadMidi()}>save midi</button>
+                    <button className="btn btn-info" onClick={()=>this.downloadMidi()}>save midi</button>
                 </div>
             </div>
         )

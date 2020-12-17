@@ -2,6 +2,7 @@ import React from 'react';
 import * as mm from "@magenta/music";
 import WebPiano from '../components/RecordingPiano'
 import Slider from 'react-input-slider';
+import '../img/page.css'
 
 class RNN extends React.Component {
     constructor(props){
@@ -14,7 +15,8 @@ class RNN extends React.Component {
             player: null,
             x: 0.5,
             tempo : 80,
-            mididata: null
+            mididata: null,
+            sample: null
         }
 
         this.TWINKLE_TWINKLE = {
@@ -95,9 +97,38 @@ class RNN extends React.Component {
         let rnnTemp = this.state.x
 
         this.music_rnn
-        .continueSequence(seque, rnnSteps, rnnTemp)
-        .then((sample) => this.player.start(sample));
+        .continueSequence(seque, rnnSteps)
+        .then((sample) => {
+            this.setState({
+                sample: sample
+            })
+            this.player.start(sample)
+        });
     } 
+
+
+    downloadMidi = () => {
+        
+        if(this.state.sample != null){
+            const midi = mm.sequenceProtoToMidi(this.state.sample);
+            const file = new Blob([midi], {type: 'audio/midi'});
+        
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(file, 'midi.mid');
+            } else { // Others
+                const a = document.createElement('a');
+                const url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = 'midi.mid';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+                }, 0); 
+            }
+        }
+    }
 
     render(){
         return(
@@ -105,7 +136,7 @@ class RNN extends React.Component {
                 <div className='text-center'>
                 <br/>
                 <div>
-                    <div>{'Randomness: '}</div>
+                    <p className="labeltext">Temperature: </p>
                     <Slider
                         axis="x"
                         xstep={0.1}
@@ -115,21 +146,13 @@ class RNN extends React.Component {
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
                     <br/>
-                    <div>{'Tempo: '}</div>
-                    <Slider
-                        axis="x"
-                        xstep={1}
-                        xmin={60}
-                        xmax={120}
-                        x={this.state.tempo}
-                        onChange={({ x }) => this.setState({ tempo: parseInt(x) })}
-                    />
                 </div>
                 <br/>
-                    <button className="btn btn-outline-info" onClick={()=>this.quantize()}>Generate</button>
-                    <button className="btn btn-outline-danger" onClick={()=>this.play()}>Stop</button>
+                    <button className="btn btn-info" onClick={()=>this.quantize()}>Generate</button>
+                    <button className="btn btn-danger" onClick={()=>this.play()}>Stop</button>
+                    <button className="btn btn-info" onClick={()=>this.downloadMidi()}>save midi</button>
                 </div>
-                <br/><br/><br/>
+                <br/><br/>
                 <div className='text-center'>
                     <WebPiano passMidiData={this.mididata}/>
                 </div>

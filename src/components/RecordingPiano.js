@@ -7,6 +7,7 @@ import 'react-piano/dist/styles.css';
 import DimensionsProvider from '../DimensionsProvider';
 import SoundfontProvider from '../SoundfontProvider';
 import PianoWithRecording from './PianoWithRecording';
+import '../img/page.css'
 
 // webkitAudioContext fallback needed to support Safari
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -109,7 +110,7 @@ class WebPiano extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="h3">Piano Keyboard Recording</h1>
+        <h1 className="h3 pagetext">Piano Keyboard Recording</h1>
         <div className="mt-5">
           <SoundfontProvider
             instrumentName="acoustic_grand_piano"
@@ -120,7 +121,7 @@ class WebPiano extends React.Component {
                 recording={this.state.recording}
                 setRecording={this.setRecording}
                 noteRange={noteRange}
-                width={300}
+                width={600}
                 playNote={playNote}
                 stopNote={stopNote}
                 disabled={isLoading}
@@ -132,6 +133,7 @@ class WebPiano extends React.Component {
         <div className="mt-5">
           {/*<button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>*/}
+          <button>Record</button>
           <button onClick={this.onClickClear}>Clear</button>
           <button onClick={this.onClickSave}>Done</button>
         </div>

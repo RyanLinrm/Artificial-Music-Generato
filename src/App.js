@@ -4,7 +4,7 @@ import Homepage from "./pages/homepage"
 import VAEpage from './pages/VAEpage'
 import RNNpage from './pages/RNNpage'
 import ChordPage from './pages/ChordPage'
-import Toolspage from './pages/Toolspage'
+import AboutPage from './pages/Aboutpage'
 
 class App extends React.Component {
   render(){
@@ -15,7 +15,7 @@ class App extends React.Component {
             <Route path="/gentrio" component={VAEpage} />
             <Route path="/genmelody" component={RNNpage} />
             <Route path="/genwithchords" component={ChordPage} />
-            <Route path="/tools" component={Toolspage} />
+            <Route path="/about" component={AboutPage} />
             <Route path="/">
               <Homepage />
             </Route>
