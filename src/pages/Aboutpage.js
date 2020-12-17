@@ -1,13 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+import '../img/page.css'
 
 class AboutPage extends React.Component {
   
   render(){
 
     return (
-      <div>
-        <h4 className="text-center">About</h4>
+      <div id='aboutpage'>
+        <br/><br/>
+        <h1 className="text-center hometext">About This Project</h1>
+        <p>123</p>
+        <br/><br/>
+        <h1 className="text-center hometext">About Me</h1>
+        <p>Runmin Lin</p>
+        <br/><br/>
       </div>
     );
 

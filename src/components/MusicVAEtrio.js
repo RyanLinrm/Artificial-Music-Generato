@@ -96,7 +96,7 @@ class MusicVAE extends React.Component {
                         x={this.state.x}
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
-                    <br/>
+                    <br/><br/>
                     <div>{'Tempo: '}</div>
                     <Slider
                         axis="x"
@@ -107,18 +107,18 @@ class MusicVAE extends React.Component {
                         onChange={({ x }) => this.setState({ tempo: parseInt(x) })}
                     />
                 </div>
-                <br/>
+                <br/><br/>
                 <div>
-                    <button className="btn btn-outline-info" onClick={()=>this.generate()}>Generate</button>
+                    <button className="btn btn-info" onClick={()=>this.generate()}>Generate</button>
                 </div>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-primary" onClick={()=>this.start(0)}>play</button>
-                    <button className="btn btn-outline-danger" onClick={()=>this.end()}>stop</button>
+                    <button className="btn btn-primary" onClick={()=>this.start(0)}>play</button>
+                    <button className="btn btn-danger" onClick={()=>this.end()}>stop</button>
                 </div>
                 <br/>
                 <div>
-                    <button className="btn btn-outline-info" onClick={()=>this.downloadMidi()}>save midi</button>
+                    <button className="btn btn-info" onClick={()=>this.downloadMidi()}>save midi</button>
                 </div>
             </div>
         )
