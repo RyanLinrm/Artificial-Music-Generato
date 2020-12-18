@@ -13,7 +13,7 @@ class RNN extends React.Component {
         this.state = {
             trio: null,
             player: null,
-            x: 0.5,
+            x: 1.0,
             tempo : 80,
             mididata: null,
             sample: null
@@ -140,8 +140,8 @@ class RNN extends React.Component {
                     <Slider
                         axis="x"
                         xstep={0.1}
-                        xmin={0.1}
-                        xmax={1}
+                        xmin={0.5}
+                        xmax={1.5}
                         x={this.state.x}
                         onChange={({ x }) => this.setState({ x: parseFloat(x.toFixed(2)) })}
                     />
